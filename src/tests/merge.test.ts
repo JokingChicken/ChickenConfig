@@ -1,6 +1,9 @@
+import * as ObjectUtils from "../ObjectUtils.ts";
+
+
 Deno.test("Check correctly (deep) merge", () =>
 {
-	console.log("type:", typeCheckAndMerge(
+	console.log("type:", ObjectUtils.typeCheckAndMerge(
 		{
 
 			test: true,
