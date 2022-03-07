@@ -1,0 +1,50 @@
+{
+	"deno.lint": false,
+	"deno.enable": true,
+	"deno.unstable": false,
+	"deno.suggest.paths": true,
+	"deno.importMap": "./src/import_map.json",
+	"deno.suggest.imports.hosts": {
+		"https://deno.land": true
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[markdown]": {
+		"editor.formatOnType": false,
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "vscode.markdown-language-features",
+		"editor.wordWrap": "on",
+		"editor.quickSuggestions": false
+	},
+	"editor.mouseWheelZoom": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.comments.insertSpace": true,
+	"explorer.confirmDragAndDrop": false,
+	"files.insertFinalNewline": true,
+	"json.format.enable": true,
+	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+	"typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+	"typescript.format.insertSpaceAfterConstructor": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+	"typescript.format.insertSpaceAfterTypeAssertion": true,
+	"typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+	"typescript.format.semicolons": "insert",
+	"editor.rulers": [
+		80,
+		100
+	],
+	"cSpell.words": [
+		"axoid",
+		"deno",
+		"denolib",
+	]
+}
