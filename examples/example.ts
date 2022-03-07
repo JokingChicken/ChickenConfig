@@ -33,6 +33,8 @@ console.log("old defaultValue:", configObject.defaultValue);
 configObject.defaultValue = false;
 console.log("new defaultValue:", configObject.defaultValue);
 
+config1.write();
+
 
 /**
  * -----------------------------------------------------------------------------
@@ -60,6 +62,8 @@ const configObject2 = config2.get();
 
 // this should print the old value, because write was not used
 console.log("defaultValue:", (configObject2 as any).defaultValue);
+
+configObject2.hiddenObject.isHidden = false;
 
 // we can write, and all non default values will stay in config
 config2.write(configObject2);
