@@ -31,13 +31,15 @@ export function findOrCreateFile (opts: ILoadOptions): string
 	}
 
 	// if no path is given, we want to search every directory
-	const searchPath = deepSearchFile(opts);
+	let searchPath = deepSearchFile(opts);
 
 	// we found a file with the same name, return path
 	if (searchPath) return searchPath;
 
 	// by default we use the 
-	return join("/", opts.filename);
+	searchPath = join("/", opts.filename);
+	Deno.createSync(searchPath);
+	return searchPath;
 };
 
 /**
