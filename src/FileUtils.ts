@@ -1,5 +1,13 @@
 import {join, normalize} from "https://deno.land/std@0.128.0/path/mod.ts";
-import {ILoadOptions} from "./config.ts";
+
+/**
+ * user options to search file
+ */
+interface ILoadOptions
+{
+	readonly filename: string;
+	readonly searchDir?: string;
+}
 
 
 /**
