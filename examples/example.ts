@@ -1,6 +1,6 @@
 /** 
  * this is an example file to show how to use this util
- * run with: deno run -A load.config.ts 
+ * run with: deno run -A example.ts 
  */
 
 //import Config from "https://deno.land/x/chickenconfig/mod.ts";
@@ -13,7 +13,7 @@ const config1 = await Config.load(
 		searchDir: "examples/"
 	},
 
-	// this is the default object, for type completion
+	// this is the default object; for type completion and default values
 	{
 		defaultValue: true,
 		createNew: true,
@@ -26,7 +26,7 @@ const config1 = await Config.load(
 
 // get the object from the file
 // dont do this every time, as typechecking is expensive!
-var configObject = config1.get();
+var configObject = config1.read();
 console.log("old defaultValue:", configObject.defaultValue);
 
 // set the object to something else
@@ -58,7 +58,7 @@ const config2 = await Config.load(
 	}
 );
 
-const configObject2 = config2.get();
+const configObject2 = config2.read();
 
 // this should print the old value, because write was not used
 console.log("defaultValue:", (configObject2 as any).defaultValue);

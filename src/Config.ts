@@ -46,7 +46,7 @@ export default class Config<T>
 	 * it will replace it with default (in file and returned object)
 	 * @returns the most recent version of the file, type checked with default
 	 */
-	get ()
+	read ()
 	{
 		// get the file contents
 		//TODO: handle errors when reading text from file
