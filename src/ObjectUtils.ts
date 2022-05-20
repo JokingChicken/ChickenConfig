@@ -33,6 +33,11 @@ export function typeCheckAndMerge<T> (object: any, defaultObject: T): T
 	return object;
 }
 
+/**
+ * check if given any is object
+ * @param object the value to check
+ * @returns true if value is a object
+ */
 export function isObject (object: any)
 {
 	return (typeof object === "object" &&
