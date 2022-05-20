@@ -49,8 +49,11 @@ export default class Config<T>
 	read ()
 	{
 		// get the file contents
-		//TODO: handle errors when reading text from file
-		const content = Deno.readTextFileSync(this.filePath);
+		var content;
+		try
+		{
+			content = Deno.readTextFileSync(this.filePath);
+		} catch (_) {}
 
 		// if file is empty, it means that it was just created or contents deleted. 
 		// so we copy defaults into file
@@ -71,6 +74,7 @@ export default class Config<T>
 		this.write();
 
 		return this.configObject;
+
 	}
 
 	/**
