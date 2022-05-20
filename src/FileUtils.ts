@@ -11,8 +11,9 @@ interface ILoadOptions
 
 
 /**
+ * tries to find a file in given folder, and with given name
  * 
- * @param opts 
+ * @param opts the options to search for
  * @returns path of found or created file
  */
 export function findOrCreateFile (opts: ILoadOptions): string
@@ -43,9 +44,10 @@ export function findOrCreateFile (opts: ILoadOptions): string
 };
 
 /**
+ * search the file in the sub directories 
  * 
- * @param opts 
- * @returns 
+ * @param opts the options to search for
+ * @returns the found file with requested name, or undefined if not found
  */
 export function deepSearchFile (opts: ILoadOptions): string | undefined
 {
@@ -55,26 +57,35 @@ export function deepSearchFile (opts: ILoadOptions): string | undefined
 	if (existsFileSync(joinedPath))
 		return joinedPath;
 
-	//TODO: catch any errors while trying to find file
-	for (const dirEntry of Deno.readDirSync(searchDir))
+	try
 	{
-		if (dirEntry.isFile)
+		for (const dirEntry of Deno.readDirSync(searchDir))
 		{
-			if (opts.filename === dirEntry.name)
+			if (dirEntry.isFile)
 			{
-				return join(searchDir, dirEntry.name);
+				if (opts.filename === dirEntry.name)
+				{
+					return join(searchDir, dirEntry.name);
+				}
+			}
+
+			if (dirEntry.isDirectory)
+			{
+				return deepSearchFile({filename: opts.filename, searchDir: join(searchDir, dirEntry.name)});
 			}
 		}
-
-		if (dirEntry.isDirectory)
-		{
-			return deepSearchFile({filename: opts.filename, searchDir: join(searchDir, dirEntry.name)});
-		}
-	}
+	} catch (_) {}
 
 	return undefined;
+
 }
 
+/**
+ * checks if file exists from given path
+ * 
+ * @param filePath the path with filename to check if exists
+ * @returns true if exists, false if does not exist
+ */
 export function existsFileSync (filePath: string): boolean
 {
 	try
@@ -89,14 +100,27 @@ export function existsFileSync (filePath: string): boolean
 	}
 }
 
-
+/**
+ * writes the given object to path
+ * formats object with tabs for easy reading
+ * 
+ * @param path the path that the content should be written to
+ * @param content the content to write to file
+ * @returns boolean if content is successfully written
+ */
 export function writeFile (path: string, content: any) 
 {
 	path = normalize(path);
 	// create string from object, and make string pretty
 	const stringContent = content === "" ? "" : JSON.stringify(content, null, "\t");
 
-	//TODO: handle errors when writing text to file
-	Deno.createSync(path);
-	Deno.writeTextFileSync(path, stringContent);
+	try
+	{
+		Deno.createSync(path);
+		Deno.writeTextFileSync(path, stringContent);
+		return true;
+	} catch (_)
+	{
+		return false;
+	}
 }
